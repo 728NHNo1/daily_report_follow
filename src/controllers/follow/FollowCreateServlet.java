@@ -59,7 +59,6 @@ public class FollowCreateServlet extends HttpServlet {
             em.persist(f);
             em.getTransaction().commit();
             em.close();
-            request.getSession().setAttribute("flush","フォローしました。");
 
             //結果画面へリダイレクト
             response.sendRedirect(request.getContextPath() + "/follow/show?status=followed&id="+request.getParameter("id"));
