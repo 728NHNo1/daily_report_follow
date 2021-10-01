@@ -17,12 +17,13 @@
           <th>氏名</th>
         </tr>
         <c:forEach var="employee" items="${employees}" varStatus="status">
-          <tr class="row${status.count % 2}">
-                <td>${employee.code}</td>
-            <td>
-                  <a href="<c:url value='/follow/show?id=${employee.id}' />">${employee.name}</a>
-              </td>
-          </tr>
+          <c:if test="${login_employee.id != employee.id}">
+            <tr class="row${status.count % 2}">
+              <td>${employee.code}</td>
+              <td><a
+                href="<c:url value='/follow/show?id=${employee.id}' />">${employee.name}</a></td>
+            </tr>
+          </c:if>
         </c:forEach>
       </tbody>
     </table>

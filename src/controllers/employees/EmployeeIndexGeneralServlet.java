@@ -52,6 +52,9 @@ public class EmployeeIndexGeneralServlet extends HttpServlet {
 
         em.close();
 
+        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
+
+        request.setAttribute("login_employee",login_employee);
         request.setAttribute("employees", employees);
         request.setAttribute("employees_count", employees_count);
         request.setAttribute("page", page);

@@ -46,7 +46,7 @@ public class ReportsIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        Employee login_employee = (Employee)request.getSession().getAttribute("login_employee");
+        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
 
         //フォローしている人のにを取得
         List<Report> followerReports = em.createNamedQuery("getFollowerReports", Report.class)
@@ -57,6 +57,7 @@ public class ReportsIndexServlet extends HttpServlet {
 
         //フォローしている人の日報の数を取得
         long reports_count = (long) em.createNamedQuery("getFollowerReportsCount", Long.class)
+                .setParameter("login_employee", login_employee)
                 .getSingleResult();
 
         em.close();
@@ -64,6 +65,7 @@ public class ReportsIndexServlet extends HttpServlet {
         request.setAttribute("followerReports", followerReports);
         request.setAttribute("reports_count", reports_count);
         request.setAttribute("page", page);
+        request.setAttribute("reports", followerReports);
         if (request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");

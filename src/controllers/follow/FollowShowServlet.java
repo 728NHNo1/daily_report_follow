@@ -52,6 +52,7 @@ public class FollowShowServlet extends HttpServlet {
                 .setParameter("follower", login_employee)
                 .setParameter("followee", e)
                 .getResultList();
+        System.out.println("Follow=" + follow.size() + " follower.id=" + login_employee.getId() + " followee.id=" + e.getId());
 
         int page;
         try {
@@ -73,10 +74,13 @@ public class FollowShowServlet extends HttpServlet {
         request.setAttribute("employee", e);
         request.setAttribute("reports", reports);
         request.setAttribute("page", page);
+        request.setAttribute("follow_size", follow.size());
         request.setAttribute("follower_count", follower_count);
         request.setAttribute("followee_count", followee_count);
         request.setAttribute("reports_count", reports_count);
         request.setAttribute("_token", request.getSession().getId());
+        //追加
+        request.setAttribute("follow", follow);
 
         //ビューとなるJSPを指定して表示する
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/topPage/otherIndex.jsp");

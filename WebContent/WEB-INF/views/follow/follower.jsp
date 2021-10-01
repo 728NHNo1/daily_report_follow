@@ -19,7 +19,7 @@
           <td><a href="<c:url value='/follow/show?id=${employee.id}' />">${employee.name}</a>
           </td>
           <td><c:choose>
-              <c:when test="条件">
+              <c:when test="">
                 <p>フォロー中</p>
               </c:when>
               <c:otherwise>

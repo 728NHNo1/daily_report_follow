@@ -35,7 +35,7 @@ public class FollowFollowerServlet extends HttpServlet {
             throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
+     //   Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
 
         int page = 1;
         try {

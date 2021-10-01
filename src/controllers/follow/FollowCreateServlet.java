@@ -42,11 +42,6 @@ public class FollowCreateServlet extends HttpServlet {
             Employee followee = em.find(Employee.class, Integer.parseInt(request.getParameter("id")));
             Employee login_employee = (Employee)request.getSession().getAttribute("login_employee");
 
-         //   List<Follow> follow = em.createNamedQuery("getFollow", Follow.class)
-              //      .setParameter("follower", login_employee)
-                //    .setParameter("followee", followee)
-                  //  .getResultList();
-
             //登録先DTO（Follow）のインスタンスを生成
             Follow f = new Follow();
 

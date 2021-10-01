@@ -18,7 +18,6 @@ import javax.persistence.Table;
         @NamedQuery(name = "getFollowerCount",query= "SELECT COUNT(f) FROM Follow As f WHERE f.follower = :me"),//ログインしている従業員がフォローしている件数をカウント
         @NamedQuery(name ="getFolloweeCount",query="SELECT COUNT(f) FROM Follow As f WHERE f.followee = :me"),//ログインしている従業員がフォローされている件数をカウント？
         @NamedQuery(name ="getFollow",query="SELECT f FROM Follow AS f WHERE f.follower=:follower AND f.followee=:followee")//この画面で表示されている従業員をフォローしているかしていないかの判定
-       // @NamedQuery(name="getUnFollow",query="SELECT f FROM Follow AS f WHERE ")
 })
 @Entity
 public class Follow {
