@@ -31,30 +31,31 @@ public class EmployeeIndexGeneralServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
+
+        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
 
         int page = 1;
         try {
             page = Integer.parseInt(request.getParameter("page"));
         } catch (NumberFormatException e) {
         }
+
         List<Employee> employees = em.createNamedQuery("getAllEffectiveEmployees", Employee.class)
-                //45行目と51行目を確認
-         //       .setParameter("me", employee_code)
+             //   .setParameter("me", login_employee)
                 .setFirstResult(15 * (page - 1))
                 .setMaxResults(15)
                 .getResultList();
 
         long employees_count = (long) em.createNamedQuery("getAllEffectiveEmployeesCount", Long.class)
-             //   .setParameter("me", employee_name)
+              //  .setParameter("me", login_employee)
                 .getSingleResult();
 
         em.close();
 
-        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
-
-        request.setAttribute("login_employee",login_employee);
+        request.setAttribute("login_employee", login_employee);
         request.setAttribute("employees", employees);
         request.setAttribute("employees_count", employees_count);
         request.setAttribute("page", page);

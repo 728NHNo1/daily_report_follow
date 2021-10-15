@@ -33,8 +33,8 @@ li {
 }
 
 p {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 a {
@@ -154,3 +154,4 @@ pre {
 h3 {
     font-size: larger;
 }
+

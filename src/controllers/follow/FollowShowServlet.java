@@ -59,6 +59,7 @@ public class FollowShowServlet extends HttpServlet {
             page = Integer.parseInt(request.getParameter("page"));
         } catch (Exception ex) {
             page = 1;
+
         }
         List<Report> reports = em.createNamedQuery("getMyAllReports", Report.class)
                 .setParameter("employee", e)
@@ -79,7 +80,6 @@ public class FollowShowServlet extends HttpServlet {
         request.setAttribute("followee_count", followee_count);
         request.setAttribute("reports_count", reports_count);
         request.setAttribute("_token", request.getSession().getId());
-        //追加
         request.setAttribute("follow", follow);
 
         //ビューとなるJSPを指定して表示する

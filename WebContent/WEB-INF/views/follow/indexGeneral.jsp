@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"%>"WebContent/WEB-INF/views/topPage/index.jsp"
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="../layout/app.jsp">
+
   <c:param name="content">
     <c:if test="${flush != null}">
 
@@ -9,18 +10,19 @@
         <c:out value="${flush}"></c:out>
       </div>
     </c:if>
+
     <h2>フォロー対象従業員 一覧</h2>
     <table id="employee_list2">
       <tbody>
         <tr>
-          <th>社員番号</th>
-          <th>氏名</th>
+          <th class="employee_code">社員番号</th>
+          <th class="employee_name">氏名</th>
         </tr>
         <c:forEach var="employee" items="${employees}" varStatus="status">
           <c:if test="${login_employee.id != employee.id}">
             <tr class="row${status.count % 2}">
-              <td>${employee.code}</td>
-              <td><a
+              <td class="employee_code">${employee.code}</td>
+              <td class="employee_name"><a
                 href="<c:url value='/follow/show?id=${employee.id}' />">${employee.name}</a></td>
             </tr>
           </c:if>

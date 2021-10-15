@@ -7,14 +7,11 @@
     <h2>${employee.name}</h2>
 
     <%--フォローが0件でフォローをする、0件以上でフォローを外すに変更 --%>
-    <%-- <c:set var="a" value="o"/> --%>
     <c:choose>
       <c:when test="${follow_size=='1'}">
-        <%--  <c:when test="${a>0}"> --%>
         <form action="<c:url value='/follow/destroy' />" method="get">
           <input type="hidden" name="_token" value="${_token}" /> <input
             type="hidden" name="id" value="${employee.id}" />
-          <%--  <form action="<c:url value='/follow/create' />" method="post">--%>
           <button type="submit">フォロー外す</button>
         </form>
       </c:when>
@@ -22,18 +19,17 @@
         <form action="<c:url value='/follow/create' />" method="post">
           <input type="hidden" name="_token" value="${_token}" /> <input
             type="hidden" name="id" value="${employee.id}" />
-          <%--  <form action="<c:url value='/follow/create' />" method="post">--%>
           <button type="submit">フォローする</button>
         </form>
       </c:otherwise>
     </c:choose>
 
     <div id="follower">
-      <a href="<c:url value='/follow/follower?id=${employee.id}' />">フォロー${follower_count}人</a>
+      <a href="<c:url value='/Follow/FollowerAnother?id=${employee.id}' />">フォロー${follower_count}人</a>
     </div>
 
     <div id="followee">
-      <a href="<c:url value='/follow/followee?id=${employee.id}' />">フォロワー${followee_count}人</a>
+      <a href="<c:url value='/Follow/FolloweeAnother?id=${employee.id}' />">フォロワー${followee_count}人</a>
     </div>
 
     <h3>【${employee.name}の日報 一覧】</h3>

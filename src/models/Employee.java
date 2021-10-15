@@ -18,7 +18,7 @@ import javax.persistence.Table;
         @NamedQuery(name = "checkRegisteredCode", query = "SELECT COUNT(e) FROM Employee AS e WHERE e.code = :code"),
         @NamedQuery(name = "checkLoginCodeAndPassword", query = "SELECT e FROM Employee AS e WHERE e.delete_flag = 0 AND e.code = :code AND e.password = :pass"),
         @NamedQuery(name = "getAllEffectiveEmployees", query = "SELECT e FROM Employee AS e WHERE e.delete_flag = 0"),
-        @NamedQuery(name = "getAllEffectiveEmployeesCount",query="SELECT COUNT (e) FROM Employee AS e WHERE e.delete_flag = 0")
+        @NamedQuery(name = "getAllEffectiveEmployeesCount", query = "SELECT COUNT (e) FROM Employee AS e WHERE e.delete_flag = 0")
 
 })
 @Entity
@@ -48,6 +48,9 @@ public class Employee {
 
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
+
+    //  @Column(name = "delete_flag1",nullable =false)
+    //private Integer delete_flag1;
 
     public Integer getId() {
         return id;
@@ -112,4 +115,13 @@ public class Employee {
     public void setDelete_flag(Integer delete_flag) {
         this.delete_flag = delete_flag;
     }
+
+    // public Integer getDelete_flag1() {
+    //   return delete_flag1;
+    //}
+
+    // public void setDelete_flag1(Integer delete_flag1) {
+    //   this.delete_flag1 = delete_flag1;
+    //}
+
 }

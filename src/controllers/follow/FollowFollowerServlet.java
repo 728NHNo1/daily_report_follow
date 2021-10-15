@@ -28,6 +28,7 @@ public class FollowFollowerServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
@@ -35,29 +36,40 @@ public class FollowFollowerServlet extends HttpServlet {
             throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-     //   Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
+      //   Employee i = em.find(Employee.class, Integer.parseInt(request.getParameter("id")));
+        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
+
 
         int page = 1;
         try {
             page = Integer.parseInt(request.getParameter("page"));
         } catch (NumberFormatException e) {
         }
-        List<Employee> employees = em.createNamedQuery("getAllEffectiveEmployees", Employee.class)
-                //47行目と53行目を確認
-              //  .setParameter("me", employee_id)
+
+        List<Employee> employees = em.createNamedQuery("getFollower", Employee.class)
+                .setParameter("me", login_employee)
                 .setFirstResult(15 * (page - 1))
                 .setMaxResults(15)
                 .getResultList();
 
-        long employees_count = (long) em.createNamedQuery("getAllEffectiveEmployeesCount", Long.class)
-           //     .setParameter("me", employee_id)
+        long employees_count = (long) em.createNamedQuery("getFollowerCount", Long.class)
+                .setParameter("me", login_employee)
                 .getSingleResult();
+
+        List<Employee> employee = em.createNamedQuery("getAllEmployees", Employee.class)
+               // .getParameter("employee")
+                .setFirstResult(15 * (page - 1))
+                .setMaxResults(15)
+               .getResultList();
 
         em.close();
 
+        request.setAttribute("login_employee", login_employee);
         request.setAttribute("employees", employees);
         request.setAttribute("employees_count", employees_count);
         request.setAttribute("page", page);
+        request.setAttribute("employee", employee);
+
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/follower.jsp");
         rd.forward(request, response);

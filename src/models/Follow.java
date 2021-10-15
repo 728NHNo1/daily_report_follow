@@ -13,11 +13,16 @@ import javax.persistence.Table;
 
 @Table(name = "follows")
 @NamedQueries({
-        @NamedQuery(name = "getAllFollows", query = "SELECT f FROM Follow AS f"),//フォロー関係のデータ全て
-        @NamedQuery(name = "getFollowsCount", query = "SELECT COUNT(f) FROM Follow AS f"),//データ全件の件数をカウント
-        @NamedQuery(name = "getFollowerCount",query= "SELECT COUNT(f) FROM Follow As f WHERE f.follower = :me"),//ログインしている従業員がフォローしている件数をカウント
-        @NamedQuery(name ="getFolloweeCount",query="SELECT COUNT(f) FROM Follow As f WHERE f.followee = :me"),//ログインしている従業員がフォローされている件数をカウント？
-        @NamedQuery(name ="getFollow",query="SELECT f FROM Follow AS f WHERE f.follower=:follower AND f.followee=:followee")//この画面で表示されている従業員をフォローしているかしていないかの判定
+        @NamedQuery(name = "getAllFollows", query = "SELECT f FROM Follow AS f"), //フォロー関係のデータ全て
+        @NamedQuery(name = "getFollowsCount", query = "SELECT COUNT(f) FROM Follow AS f"), //データ全件の件数をカウント
+        @NamedQuery(name = "getFollowerCount", query = "SELECT COUNT(f) FROM Follow As f WHERE f.follower = :me"), //ログインしている従業員がフォローしている件数をカウント
+        @NamedQuery(name = "getFolloweeCount", query = "SELECT COUNT(f) FROM Follow As f WHERE f.followee = :me"), //ログインしている従業員がフォローされている件数をカウント？
+        @NamedQuery(name = "getFollow", query = "SELECT f FROM Follow As f WHERE f.follower=:follower AND f.followee=:followee"), //この画面で表示されている従業員をフォローしているかしていないかの判定
+        @NamedQuery(name = "getFollower", query = "SELECT f.followee FROM Follow As f WHERE f.follower = :me"), //ログインしている従業員がフォローしている従業員について
+        @NamedQuery(name = "getFollowee", query = "SELECT f.follower FROM Follow As f WHERE f.followee = :me"),//ログインしている従業員がフォローされている従業員について
+        //追加
+        //  @NamedQuery(name = "getFollowAnother",query="SELECT f FROM Follow AS f WHERE f.employee = :employee "),
+
 })
 @Entity
 public class Follow {
@@ -27,11 +32,11 @@ public class Follow {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "follower",nullable=false)
+    @JoinColumn(name = "follower", nullable = false)
     private Employee follower;
 
     @ManyToOne
-    @JoinColumn(name="followee",nullable=false)
+    @JoinColumn(name = "followee", nullable = false)
     private Employee followee;
 
     public Integer getId() {
@@ -57,6 +62,5 @@ public class Follow {
     public void setFollowee(Employee followee) {
         this.followee = followee;
     }
-
 
 }

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="../layout/app.jsp">
+
   <c:param name="content">
     <c:if test="${flush != null}">
       <div id="flush_sucsses">
@@ -9,19 +11,20 @@
       </div>
     </c:if>
 
-    <h2>自分のフォロワー一覧</h2>
-    <table id="employee_list2">
+    <h2>${employee.name} のフォロー一覧</h2>
+    <table id="report_list">
       <tbody>
         <tr>
-          <th class="employee_name">氏名</th>
-          <th class="employee_generation">フォロー関係</th>
+          <th class="report_name">氏名</th>
+          <th class="report_generation">フォロー関係</th>
         </tr>
-        <c:forEach var="follower" items="${followee}" varStatus="status">
+
+        <c:forEach var="employee" items="${employees}" varStatus="status">
           <tr class="row${status.count % 2 }">
-            <td class="employee_name"><a
-              href="<c:url value='/follow/show?id=${employee.id}' />">${follower.employee.name}</a>
-              </td>
-            <td class="employee_generation">未フォロー</td>
+            <td class="report_name"><a
+              href="<c:url value='/follow/show?id=${employee.id}' />">${employee.name}</a>
+            </td>
+            <td class="report_generation">フォロー中</td>
         </c:forEach>
       </tbody>
     </table>
@@ -35,7 +38,7 @@
             <c:out value="${i}" />&nbsp;
                     </c:when>
           <c:otherwise>
-            <a href="<c:url value='/follow/followee?page=${i}' />"><c:out
+            <a href="<c:url value='/follow/follower?page=${i}' />"><c:out
                 value="${i}" /></a>&nbsp;
                     </c:otherwise>
         </c:choose>
